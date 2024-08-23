@@ -25,7 +25,7 @@ namespace DataAccessLayer
 
             try
             {
-                var selectQuery = $"exec ListBookTicket_sp ";
+                var selectQuery = $"exec ListBookTicket_sp";
                 con.Open();
                 List<TicketBooking> result = con.Query<TicketBooking>(selectQuery).ToList();
                 con.Close();
@@ -60,7 +60,7 @@ namespace DataAccessLayer
         {
             try
             {
-                var insertQuery = $"exec InsertBookTicket_sp'{userRegData.Busname}','{userRegData.Startingpoint}','{userRegData.Droppingpoint}',{userRegData.Amount},{userRegData.NoOfpeople},{userRegData.JourneyDate},{userRegData.ContactNo}";
+                var insertQuery = $"exec InsertBookTicket_sp '{userRegData.Busname}','{userRegData.Startingpoint}','{userRegData.Droppingpoint}',{userRegData.Amount},{userRegData.NoOfpeople},'{userRegData.JourneyDate}',{userRegData.ContactNo}";
                 SqlConnection con = new SqlConnection(connectionString);
                 con.Open();
                 con.Execute(insertQuery);
@@ -78,7 +78,7 @@ namespace DataAccessLayer
         {
             try
             {
-                var updateQuery = $"exec UpdateBookTicket_sp  {reg.TicketID},'{reg.Busname}','{reg.Startingpoint},'{reg.Droppingpoint},{reg.Amount},{reg.NoOfpeople},{reg.JourneyDate},{reg.ContactNo}'";
+                var updateQuery = $"exec UpdateBookTicket_sp  {reg.TicketID},'{reg.Busname}','{reg.Startingpoint}','{reg.Droppingpoint}',{reg.Amount},{reg.NoOfpeople},'{reg.JourneyDate}',{reg.ContactNo}";
                 con.Open();
                 con.Execute(updateQuery);
                 con.Close();
@@ -94,7 +94,7 @@ namespace DataAccessLayer
         {
             try
             {
-                var deleteQuery = $"exec DeleteBookTicket'{TicketId}'";
+                var deleteQuery = $"exec DeleteBookTicket_sp {TicketId}";
                 con.Open();
                 con.Execute(deleteQuery);
                 con.Close();

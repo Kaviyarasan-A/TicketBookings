@@ -49,7 +49,7 @@ namespace TicketBookings.Controllers
         }
 
         // DELETE api/<BookingController>/5
-        [HttpDelete("{Ticketid}")]
+        [HttpDelete("{TicketId}")]
         public void Delete(long  TicketId)
         {
             reg.DeleteUser(TicketId);
