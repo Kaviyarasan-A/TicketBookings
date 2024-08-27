@@ -14,11 +14,11 @@ namespace TicketBookings.Controllers
     [ApiController]
     public class BookingController : ControllerBase
     {
-        BookingRepository reg = null;
+        IBookingRepository reg= null;
 
-        public BookingController()
+        public BookingController(IBookingRepository regs)
         {
-            reg = new BookingRepository();
+            reg = regs;
         }
             // GET: api/<BookingController>
             [HttpGet]

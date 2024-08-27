@@ -6,15 +6,17 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Configuration;
 
 namespace DataAccessLayer
 {
-    public class BookingRepository
+    public class BookingRepository:IBookingRepository
     {
-        string connectionString = "server=DESKTOP-BLBGEHJ\\SQLEXPRESS;database=BusTicket;user Id =sa;password=Anaiyaan@123;";
+        string connectionString = string.Empty;// "server=DESKTOP-BLBGEHJ\\SQLEXPRESS;database=BusTicket;user Id =sa;password=Anaiyaan@123;";
         SqlConnection con = null;
-        public BookingRepository()
+        public BookingRepository(IConfiguration configuration)
         {
+            connectionString = configuration.GetConnectionString("Dbconnection");
             con = new SqlConnection(connectionString);
         }
 
