@@ -1,5 +1,4 @@
-﻿using FluentAssertions.Common;
-using Microsoft.Extensions.Configuration;
+﻿using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -12,17 +11,14 @@ using BusinessLayer.entity;
 
 namespace BusinessLayer
 {
-    public class SmtpRepository
+    public interface ISmtpRepository
     {
-        private readonly IConfiguration Configuration;
+        public void SendEmail(string fromAddress, string password, string ToAddress, string Body);
+    }
 
-        public SmtpRepository(IConfiguration configuration)
-        {
-            Configuration = configuration;
-        }
-
-
-        public static void SendEmail(string fromAddress, string password,string ToAddress,string Body)
+    public class SmtpRepository : ISmtpRepository
+    {
+        public void SendEmail(string fromAddress, string password, string ToAddress, string Body)
         {
             using SmtpClient email = new SmtpClient
             {
@@ -39,7 +35,7 @@ namespace BusinessLayer
             try
             {
                 Console.WriteLine("sending email ");
-                email.Send(fromAddress, ToAddress,password,Body);
+                email.Send(fromAddress, ToAddress, password, Body);
                 Console.WriteLine("email sent ");
             }
             catch (SmtpException e)
@@ -48,6 +44,11 @@ namespace BusinessLayer
             }
 
         }
-     
+
     }
+
+
+
+
 }
+

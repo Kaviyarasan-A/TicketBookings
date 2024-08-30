@@ -6,8 +6,6 @@ using System.Threading.Tasks;
 using BusinessLayer;
 using Microsoft.Extensions.Configuration;
 using BusinessLayer.entity;
-using Microsoft.Graph;
-using Microsoft.Graph.Models;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -17,13 +15,13 @@ namespace TicketBookings.Controllers
     [ApiController]
     public class EmailController : ControllerBase
     {
-        public readonly SmtpRepository smtpRepository;
-        public readonly IConfiguration configuration;
+        public readonly ISmtpRepository _smtpRepository;
+        public readonly IConfiguration _configuration;
 
-        public EmailController(SmtpRepository smtpRepository, IConfiguration configuration)
+        public EmailController(ISmtpRepository smtpRepository, IConfiguration configuration)
         {
-            configuration = configuration;
-            smtpRepository = smtpRepository;
+            _configuration = configuration;
+            _smtpRepository = smtpRepository;
         }
         // GET: api/<EmailController>
         [HttpGet]
@@ -41,8 +39,12 @@ namespace TicketBookings.Controllers
 
         // POST api/<EmailController>
         [HttpPost]
-        public void ActionResult<SmtpEmail>Post ([FromBody] SmtpEmail value)
+        public ActionResult<SmtpEmail> Post([FromBody] SmtpEmail value)
         {
+            var Fromaddress = _configuration.GetValue<string>("SMTP:Fromaddress");
+            var Password = _configuration.GetValue<string>("SMTP:Password");
+            _smtpRepository.SendEmail(Fromaddress, Password, value.ToAddress, value.Body);
+            return Ok();
         }
 
         // PUT api/<EmailController>/5

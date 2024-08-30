@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using System;
@@ -15,6 +16,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using BusinessLayer;
 
+
 namespace TicketBookings
 {
     public class Startup
@@ -22,6 +24,7 @@ namespace TicketBookings
         public Startup(IConfiguration configuration)
         {
             var connection = Configuration.GetConnectionString("Dbconnection");
+            var value = configuration.GetSection("Connection:Dbconnection").Value;
             var Fromaddress = configuration.GetValue<string>("SMTP:Fromaddress");
             var Password = configuration.GetValue<string>("SMTP:Password");
 
@@ -38,14 +41,19 @@ namespace TicketBookings
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            var connection = Configuration.GetConnectionString("Dbconnection");
+            services.AddDbContext<LocationDbcontext>(options => options.UseSqlServer(connection));
+
+            services.AddTransient<ILocationRepository, LocationRepository>();
             services.AddTransient<IBookingRepository,BookingRepository>();
+            services.AddTransient<ISmtpRepository, SmtpRepository>();
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "TicketBookings", Version = "v1" });
             });
-            services.AddControllers();
-            services.AddSingleton<SmtpRepository>();
+           
+            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
