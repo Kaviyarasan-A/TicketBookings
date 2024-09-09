@@ -1,0 +1,215 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <title>Bookings</title>
+    <link href="Stylebooking.css" rel="stylesheet" />
+    <link rel="icon" href="bus-logo-abstract_7315-17.avif"/>
+
+    <script>
+        alert("Your page is loading");
+        console.log("true")
+
+        function Save()
+        {
+            debugger;
+            var Busname = document.getElementById("Bname").value;
+            var Startingpoint = document.getElementById("Spoint").value;
+            var Droppingpoint = document.getElementById("Dpoint").value;
+            var Amount = document.getElementById("Amt").value;
+            var noOfpeople = document.getElementById("noOfpeople").value;
+            var JourneyDate = document.getElementById("JDate").value;
+            var ContactNo = document.getElementById("Cnumber").value;
+
+            if (Busname == "") {
+                alert("please enter your Busname");
+                return;
+            }
+            else if (Startingpoint == "") {
+                alert("Choose your starting point");
+                return;
+
+            }
+
+            else if (Droppingpoint == "") {
+                alert("Choose Dropping Point");
+                return;
+            }
+
+            else if (Amount == "") {
+                alert("Choose amount");
+                return;
+            }
+
+            else if (noOfpeople == "") {
+                alert("Choose NoOfPassengers");
+                return;
+            }
+
+            else if (JourneyDate == "") {
+                alert("enter the date");
+                return;
+            }
+
+            else if (ContactNo == "") {
+                alert("Enter Your Number");
+                return;
+            }
+
+
+
+            var JsonObj =
+            {
+                "Busname": Busname,
+                "Startingpoint": Startingpoint,
+                "Droppingpoint": Droppingpoint,
+                "Amount": Amount,
+                "noOfpeople": noOfpeople,
+                "JourneyDate": JourneyDate,
+                "ContactNo": ContactNo,
+
+            }
+            const xhttp = new XMLHttpRequest();
+            xhttp.open("POST", "https://localhost:44397/api/Booking");
+            xhttp.setRequestHeader("Content-Type", "application/json; charset=UTF-8");
+            xhttp.onreadystatechange = function () {
+                alert("successfully Registered");
+            };
+            xhttp.send(JSON.stringify(JsonObj));
+
+            return Busname;
+            return Startingpoint;
+            return Droppingpoint;
+            return Amount;
+            return noOfpeople;
+            return JourneyDate;
+            return ContactNo;
+           
+        };
+
+        function SelectALLUser() {
+
+            const xhttp = new XMLHttpRequest();
+
+            xhttp.open("GET", "https://localhost:44397/api/Booking");
+            xhttp.setRequestHeader("Content-Type", "application/json; charset=UTF-8");
+            xhttp.onreadystatechange = function () {
+
+                var res = JSON.parse(xhttp.response);
+                console.log(res);
+                alert("success");
+
+            };
+
+            xhttp.send();
+        }
+    </script>
+</head>
+<body onload="SelectALLUser()">
+    <form>
+        <div>
+            <h1 align="center"> Book Your Journey </h1>
+            <p>
+                <ul>
+                    Wanderlust and adventures await.
+                    Exploring new horizons, one destination at a time.
+                    Memories in the making.
+                    Unveiling the wonders of the world.
+                    Falling in love with the journey, not just the destination.
+                    Solo travel for life.
+                    Traveling is the best way to feed the soul and expand the mind.
+                </ul>
+               
+            </p>
+        </div>
+        <br />
+        <hr />
+        <div>
+            <table id="Book" align="center">
+
+                <tr>
+
+                    <td> <label for="Bname">Bus name:</label></td>
+                    <td> <input type="text" id="Bname" placeholder="Bus name" value="" /></td>
+
+                </tr>
+
+                <tr>
+
+
+                    <td>
+                        <label for="Spoint">Choose a Startingpoint:</label>
+                    </td>
+                    <td>
+                        <select id="Spoint" name="Spoint" value="">
+                            <option value="Sel">Select </option>
+                            <option value="Bangalore">Banglore</option>
+                            <option value="Chennai">Chennai</option>
+                            <option value="Coimbatore">Coimbatore</option>
+                            <option value="Palani">Palani</option>
+                        </select>
+                    </td>
+
+
+                </tr>
+
+                <tr>
+
+
+                    <td>
+                        <label for="Dpoint">Choose a Droppingpoint:</label>
+                    </td>
+                    <td>
+                        <select id="Dpoint" name="Dpoint" value="">
+                            <option value="Sel">Select </option>
+                            <option value="Bangalore">Banglore</option>
+                            <option value="Chennai">Chennai</option>
+                            <option value="Coimbatore">Coimbatore</option>
+                            <option value="Palani">Palani</option>
+                        </select>
+                    </td>
+
+                </tr>
+
+                <tr>
+                    <td>
+                        <label for="Amt">Choose an Amount:</label>
+                    </td>
+                    <td>
+                        <select id="Amt" name="Amt" value="">
+                            <option value="Sel">Select </option>
+                            <option value="1"> 1000</option>
+                            <option value="2"> 800</option>
+                            <option value="3"> 500</option>
+
+                        </select>
+                    </td>
+                </tr>
+
+
+
+                <tr>
+                    <td> <label for="noOfpeople">noOfpeople:</label></td>
+                    <td><input type="number" id="noOfpeople" placeholder="NoOfPassengers" min="1" max="40" value="" /></td>
+                </tr>
+
+                <tr>
+                    <td><label for="JDate">Journey Date:</label></td>
+                    <td><input type="date" id="JDate" value="" /></td>
+                </tr>
+               
+
+                <tr>
+                    <td><label for="Cnumber">ContactNo:</label></td>
+                    <td><input type="text" id="Cnumber" placeholder="Contact number" value="" /></td>
+                </tr>
+
+                <tr><td align="right"><input type="button" onclick="Save();" value="submit" /></td></tr>
+
+            </table>
+
+            
+        </div>
+    </form>
+</body>
+</html>

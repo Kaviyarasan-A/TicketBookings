@@ -3,11 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.34931.43
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TicketBookings", "TicketBookings\TicketBookings.csproj", "{DAF2E9E1-4582-4739-AC57-B8C13C4A821D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TicketBookings", "TicketBookings\TicketBookings.csproj", "{DAF2E9E1-4582-4739-AC57-B8C13C4A821D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BusinessLayer", "BusinessLayer\BusinessLayer.csproj", "{8364B48C-513B-46D2-9F16-01043AAF2F88}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BusinessLayer", "BusinessLayer\BusinessLayer.csproj", "{8364B48C-513B-46D2-9F16-01043AAF2F88}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataAccessLayer", "DataAccessLayer\DataAccessLayer.csproj", "{EFBC7838-4221-4838-BA85-0AD08BE7BE48}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataAccessLayer", "DataAccessLayer\DataAccessLayer.csproj", "{EFBC7838-4221-4838-BA85-0AD08BE7BE48}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PresentationLayer", "PresentationLayer\PresentationLayer.csproj", "{BB92BEF2-0C74-4A2B-B848-A22C815466DF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +29,10 @@ Global
 		{EFBC7838-4221-4838-BA85-0AD08BE7BE48}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EFBC7838-4221-4838-BA85-0AD08BE7BE48}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EFBC7838-4221-4838-BA85-0AD08BE7BE48}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BB92BEF2-0C74-4A2B-B848-A22C815466DF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BB92BEF2-0C74-4A2B-B848-A22C815466DF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BB92BEF2-0C74-4A2B-B848-A22C815466DF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BB92BEF2-0C74-4A2B-B848-A22C815466DF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

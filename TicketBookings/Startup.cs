@@ -52,6 +52,7 @@ namespace TicketBookings
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "TicketBookings", Version = "v1" });
             });
+            services.AddCors();
            
             
         }
@@ -66,7 +67,16 @@ namespace TicketBookings
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "TicketBookings v1"));
             }
 
+            app.UseCors(builder =>
+            {
+                builder
+                .AllowAnyOrigin()
+                .AllowAnyMethod()
+                .AllowAnyHeader();
+            });
+
             app.UseHttpsRedirection();
+            app.UseStaticFiles();
 
             app.UseRouting();
 
@@ -75,6 +85,7 @@ namespace TicketBookings
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+                
             });
         }
     }
